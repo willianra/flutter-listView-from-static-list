@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
                       );
                     },),
 
-                 title: new Text("lista de productos"),
+                 title: new Text("lista de articulos"),
                  actions: <Widget>[
                    IconButton(icon: new Icon(Icons.access_alarms),color: Colors.redAccent,),
                    IconButton(icon: new Icon(Icons.access_alarms),color: Colors.redAccent,),
@@ -39,34 +39,26 @@ class _HomeState extends State<Home> {
               body: Center(
               child: Center(
                 child: ListView(
-                  children: _crearProductos(),
+                  children: _listProduct(),
                 ),
               ),
          ),
     );
   }
-//regresa una lista 
-List<Widget>_crearProductos(){
-  List<Widget>Lista=new List<Widget>();
-  for (var i = 0; i < UrlProduct.length; i++) {
-    final Widgettemporal=Container(
-      child: Column(
-        children: <Widget>[
-          Image.network(UrlProduct.elementAt(i)),
-          Text(Produtos.elementAt(i)),
-          FloatingActionButton(
-            backgroundColor: Colors.redAccent,
-            child: Text(Precios.elementAt(i)),
-          ),
-        ],
-      ),
-    );
-    
-    Lista.add(Widgettemporal);
-  }
-  
-  
-  return Lista;
 
-}
+List<Widget>_listProduct(){
+var  widgets = Produtos.map((articulo){
+    return ListTile(  
+      leading: Icon(Icons.card_giftcard),
+      title: Text(articulo),
+      subtitle: Text(Precios.elementAt(Produtos.indexOf(articulo))),
+      trailing: Icon(Icons.check),
+      onTap: (){
+        print(articulo);
+
+      },
+    );
+  }).toList();
+  return widgets;
+} 
 }
